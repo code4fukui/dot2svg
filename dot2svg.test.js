@@ -1,5 +1,5 @@
 import * as t from "https://deno.land/std/testing/asserts.ts";
-import { dot2svg, Polygon } from "./dot2svg.js";
+import { dot2svg } from "./dot2svg.js";
 import { s2dots } from "./s2dots.js";
 
 Deno.test("simple", () => {
@@ -15,17 +15,6 @@ Deno.test("polygon", () => {
   t.assertEquals(dot2svg([[1, 1], [1, 0]], 10), `<polygon points="0,0 20,0 20,10 10,10 10,20 0,20 0,0"/>`)
   t.assertEquals(dot2svg([[1, 1, 1], [1, 0, 1]], 10), `<polygon points="0,0 30,0 30,20 20,20 20,10 10,10 10,20 0,20 0,0"/>`)
   t.assertEquals(dot2svg([[1, 1, 1], [1, 0, 1], [0, 1, 0]], 10), `<polygon points="0,0 30,0 30,20 20,20 20,10 10,10 10,20 0,20 0,0"/><rect x="10" y="20" width="10" height="10"/>`)
-});
-Deno.test("polygon contains", () => {
-  const p = new Polygon([
-    { x: 0, y: 0 },
-    { x: 100, y: 0 },
-    //{ x: 100, y: 100 },
-    { x: 0, y: 100 },
-  ]);
-  t.assertEquals(p.contains({ x: 40, y: 50 }), true);
-  t.assertEquals(p.contains({ x: 51, y: 50 }), false);
-  t.assertEquals(p.contains({ x: 150, y: 50 }), false);
 });
 Deno.test("polygon hole", () => {
   const dots = s2dots(`111\n101\n111`);
