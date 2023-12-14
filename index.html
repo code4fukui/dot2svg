@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><link rel="icon" href="data:">
+<title>dot2svg demo</title>
+</head><body>
+<h1>dot2svg demo</h1>
+<div id=divsvg style="display: inline-block; width: 300px; margin: 30px;"></div><br>
+<textarea id=tasvg></textarea><br>
+
+<a href=https://github.com/code4fukui/dot2svg/>src on GitHub</a>
+<style>
+body {
+  text-align: center;
+  font-family: sans-serif;
+}
+textarea {
+  width: 50em;
+  height: 10em;
+}
+</style>
+
+<script type="module">
+import { dot2svg } from "./dot2svg.js";
+import { s2dots } from "./s2dots.js";
+
+const svgichigo = dot2svg(s2dots(`
+00000100
+00111110
+00101111
+01010110
+01101010
+11010110
+10101100
+11110000
+`), 10);
+
+const svgbase = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="black">`;
+//const svg = svgbase;
+const svg = svgbase + svgichigo + "</" + "svg>";
+console.log(svg);
+divsvg.innerHTML = svg;
+tasvg.value = svg;
+tasvg.oninput = () => {
+  divsvg.innerHTML = tasvg.value;
+};
+
+</script>
