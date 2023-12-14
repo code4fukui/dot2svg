@@ -1,4 +1,5 @@
-import { Polygon, Rect } from "./Geometry.js"
+import { Polygon, Rect } from "./Geometry.js";
+import { makeRoundPath } from "./makeRoundPath.js";
 
 export const s2dots = (s) => s.trim().split("\n").map(i => i.split("").map(i => parseInt(i)));
 
@@ -150,8 +151,17 @@ const rects2polygons = (rects, dotw) => {
   return res.map(i => i.toRectIfCan());
 };
 
-export const dot2svg = (dots, dotw) => {
+export const dot2polygons = (dots, dotw) => {
   const rects = dot2rects(dots, dotw);
   const res = rects2polygons(rects, dotw);
-  return res.map(i => i.toSVG()).join("");
+  return res;
+};
+
+export const dot2svg = (dots, dotw, roundr = 0) => {
+  const res = dot2polygons(dots, dotw);
+  if (!roundr) {
+    return res.map(i => i.toSVG()).join("\n");
+  } else {
+    return makeRoundPath(res, roundr);
+  }
 };
