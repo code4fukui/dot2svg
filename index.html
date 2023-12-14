@@ -33,9 +33,7 @@ const svgichigo = dot2svg(s2dots(`
 `), 10);
 
 const svgbase = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="black">`;
-//const svg = svgbase;
 const svg = svgbase + svgichigo + "</" + "svg>";
-console.log(svg);
 divsvg.innerHTML = svg;
 tasvg.value = svg;
 tasvg.oninput = () => {

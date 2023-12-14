@@ -1,31 +1,30 @@
 # dot2svg
 
+create SVG from dots
+
+## demo
+
+- https://code4fukui.github.io/dot2svg/
+
+## usage
+
+```js
+const svgichigo = dot2svg(s2dots(`
+00000100
+00111110
+00101111
+01010110
+01101010
+11010110
+10101100
+11110000
+`), 10);
+
+const svgbase = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="black">`;
+const svg = svgbase + svgichigo + "</" + "svg>";
+divsvg.innerHTML = svg;
+```
+
 ## blog
 
-
-左上を選ぶ
-dir 上、右、下、左
-左上のポイントからスタート
-  switch dir
-    case 上
-      右上があれば
-        上へ
-        dir = 左
-      右があれば
-        右へ
-      右がなければ
-        下へいって
-        dir = 右
-    case 右
-      下があれば下へ
-      下がなければ
-        左へ
-        dir = 下
-    case 下
-      左があれば左へ
-
-穴あきポリゴン
-  作ったポリゴンの内側で、rect集合に含まないものrect集合をつくる
-  ポリゴン集合を作成して、くり抜く
-
-任意の点がポリゴンの中にいるどうか判定
+- https://fukuno.jig.jp/4158
