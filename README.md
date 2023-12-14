@@ -9,7 +9,7 @@ create SVG from dots
 ## usage
 
 ```js
-const svgichigo = dot2svg(s2dots(`
+const svgichigo = dot2svg(`
 00000100
 00111110
 00101111
@@ -18,7 +18,7 @@ const svgichigo = dot2svg(s2dots(`
 11010110
 10101100
 11110000
-`), 10);
+`, 10);
 
 const svgbase = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="black">`;
 const svg = svgbase + svgichigo + "</" + "svg>";

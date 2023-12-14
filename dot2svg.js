@@ -1,6 +1,11 @@
 import { Polygon, Rect } from "./Geometry.js"
 
+export const s2dots = (s) => s.trim().split("\n").map(i => i.split("").map(i => parseInt(i)));
+
 export const dot2rects = (dots, dotw) => {
+  if (typeof dots == "string") {
+    dots = s2dots(dots);
+  }
   const res = [];
   for (let y = 0; y < dots.length; y++) {
     for (let x = 0; x < dots[y].length; x++) {
