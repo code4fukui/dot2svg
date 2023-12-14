@@ -1,5 +1,6 @@
 import { Rect } from "./Rect.js";
 import { Polygon } from "./Polygon.js";
+import { round } from "./round.js";
 
 export const makeRoundPath = (polygon, r) => {
   if (Array.isArray(polygon)) {
@@ -13,6 +14,10 @@ export const makeRoundPath = (polygon, r) => {
     polygon = new Polygon(polygon);
   }
   const res = [];
+  const push = (cmd, x, y) => {
+    const n = 5;
+    res.push(`${cmd}${round(x, n)},${round(y, n)}`);
+  };
   const p = polygon.points;
   for (let i = 0; i < p.length;) {
     const p0 = p[i];
@@ -32,9 +37,9 @@ export const makeRoundPath = (polygon, r) => {
     if (closepath) {
       x0 = p0.x + Math.cos(th) * r;
       y0 = p0.y + Math.sin(th) * r;
-      res.push(`M${x0},${y0}`);
+      push("M", x0, y0);
     } else {
-      res.push(`M${p0.x},${p0.y}`);
+      push("M", p0.x , p0.y);
       last = p.length - 1;
     }
     let pp = p1;
@@ -43,23 +48,23 @@ export const makeRoundPath = (polygon, r) => {
       const p2 = p[j];
       const x2 = pp.x - Math.cos(thp) * r;
       const y2 = pp.y - Math.sin(thp) * r;
-      res.push(`L${x2},${y2}`);
+      push("L", x2, y2);
       const th2 = Math.atan2(p2.y - pp.y, p2.x - pp.x);
       const x3 = pp.x + Math.cos(th2) * r;
       const y3 = pp.y + Math.sin(th2) * r;
-      res.push(`C${pp.x},${pp.y} ${x3},${y3}`);
-      res.push(`${x3},${y3}`);
+      push("Q", pp.x, pp.y);
+      push("", x3, y3);
       pp = p2;
       thp = th2;
     }
     if (closepath) {
       const x = pp.x - Math.cos(thp) * r;
       const y = pp.y - Math.sin(thp) * r;
-      res.push(`L${x},${y}`);
-      res.push(`C${p0.x},${p0.y} ${x0},${y0}`);
-      res.push(`${x0},${y0}`);
+      push("L", x, y);
+      push("Q", p0.x, p0.y);
+      push("", x0, y0);
     } else {
-      res.push(`L${pp.x},${pp.y}`);
+      push("L", pp.x, pp.y);
     }
     i = last + 1;
   }
