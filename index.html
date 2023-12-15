@@ -2,7 +2,9 @@
 <title>dot2svg demo</title>
 </head><body>
 <h1>dot2svg demo</h1>
-<div id=divsvg style="display: inline-block; width: 300px; margin: 30px;"></div><br>
+<div id=divsvg style="display: inline-block; width: 300px; margin: 20px;"></div><br>
+<label><input type=checkbox id=chkround>round</label><br>
+<br>
 <textarea id=tasvg></textarea><br>
 
 <a href=https://github.com/code4fukui/dot2svg/>src on GitHub</a>
@@ -20,7 +22,8 @@ textarea {
 <script type="module">
 import { dot2svg } from "./dot2svg.js";
 
-const svgichigo = dot2svg(`
+const show = () => {
+  const svgichigo = dot2svg(`
 00000100
 00111110
 00101111
@@ -29,14 +32,19 @@ const svgichigo = dot2svg(`
 11010110
 10101100
 11110000
-`, 10);
+  `, 10, chkround.checked ? 2 : 0);
 
-const svgbase = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="black">`;
-const svg = svgbase + svgichigo + "</" + "svg>";
-divsvg.innerHTML = svg;
-tasvg.value = svg;
+  const svgbase = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="black">`;
+  const svg = svgbase + svgichigo + "</" + "svg>";
+  divsvg.innerHTML = svg;
+  tasvg.value = svg;
+};
+
 tasvg.oninput = () => {
   divsvg.innerHTML = tasvg.value;
 };
+
+chkround.oninput = () => show();
+show();
 
 </script>
