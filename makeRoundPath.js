@@ -2,13 +2,13 @@ import { Rect } from "./Rect.js";
 import { Polygon } from "./Polygon.js";
 import { round } from "./round.js";
 
-export const makeRoundPath = (polygon, r) => {
+export const makeRoundPathD = (polygon, r) => {
   if (Array.isArray(polygon)) {
     const res = [];
     for (const p of polygon) {
-      res.push(makeRoundPath(p, r));
+      res.push(makeRoundPathD(p, r));
     }
-    return res.join("\n");
+    return res.join("");
   }
   if (polygon instanceof Rect) {
     polygon = new Polygon(polygon);
@@ -53,7 +53,7 @@ export const makeRoundPath = (polygon, r) => {
       const x3 = pp.x + Math.cos(th2) * r;
       const y3 = pp.y + Math.sin(th2) * r;
       push("Q", pp.x, pp.y);
-      push("", x3, y3);
+      push("_", x3, y3);
       pp = p2;
       thp = th2;
     }
@@ -62,11 +62,16 @@ export const makeRoundPath = (polygon, r) => {
       const y = pp.y - Math.sin(thp) * r;
       push("L", x, y);
       push("Q", p0.x, p0.y);
-      push("", x0, y0);
+      push("_", x0, y0);
     } else {
       push("L", pp.x, pp.y);
     }
     i = last + 1;
   }
-  return `<path d="${res.join(" ")}"/>`;
+  return res.join("").replace(/_/g, " ");
+};
+
+export const makeRoundPath = (polygon, r) => {
+  const d = makeRoundPathD(polygon, r);
+  return `<path d="${d}"/>`;
 };
