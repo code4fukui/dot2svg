@@ -146,7 +146,7 @@ const rects2polygons1 = (rects, dotw, makeinvert = true) => {
 
 const rects2polygons = (rects, dotw) => {
   rects = rects.map(i => i);
-  rects.sort((a, b) => a.x + a.y * 1000 - b.x + b.y * 1000);
+  rects.sort((a, b) => (a.x + a.y * 1000) - (b.x + b.y * 1000));
   const res = rects2polygons1(rects, dotw);
   return res.map(i => i.toRectIfCan());
 };
