@@ -8,6 +8,8 @@ create SVG from dots
 
 ## usage
 
+- export const dot2svg = (dots, dotw, roundr = 0)
+
 ```js
 import { dot2svg } from "https://code4fukui.github.io/dot2svg/dot2svg.js";
 
