@@ -6,12 +6,12 @@ SVGを点で描くツール
 
 ## 機能
 - 点の集合からSVGを生成する
-- 丸角の設定が可能
+- 丸角のSVGを生成できる
 
 ## 使い方
-- `import { dot2svg } from "https://code4fukui.github.io/dot2svg/dot2svg.js";`
-
 ```js
+import { dot2svg } from "https://code4fukui.github.io/dot2svg/dot2svg.js";
+
 const svgichigo = dot2svg(`
 00000100
 00111110
@@ -24,7 +24,7 @@ const svgichigo = dot2svg(`
 `, 10);
 
 const svgbase = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><g fill="black">`;
-const svg = svgbase + svgichigo + "</" + "svg>";
+const svg = svgbase + svgichigo + "</svg>";
 divsvg.innerHTML = svg;
 ```
 

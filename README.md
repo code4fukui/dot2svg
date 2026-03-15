@@ -1,5 +1,7 @@
 # dot2svg
 
+> 日本語のREADMEはこちらです: [README.ja.md](README.ja.md)
+
 Create SVG from dots.
 
 ## Demo
