@@ -1,11 +1,12 @@
 # dot2svg
-SVGを点で描くツール
+
+点の集合からSVGを生成するツール
 
 ## デモ
 - https://code4fukui.github.io/dot2svg/
 
 ## 機能
-- 点の集合からSVGを生成する
+- 点の集合からSVGを生成できる
 - 丸角のSVGを生成できる
 
 ## 使い方

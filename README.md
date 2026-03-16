@@ -34,4 +34,4 @@ divsvg.innerHTML = svg;
 ```
 
 ## License
-MIT
+MIT License — see [LICENSE](LICENSE).
